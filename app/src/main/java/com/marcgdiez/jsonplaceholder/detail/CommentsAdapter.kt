@@ -1,13 +1,10 @@
 package com.marcgdiez.jsonplaceholder.detail
 
-import android.support.v7.widget.RecyclerView
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.marcgdiez.jsonplaceholder.R
+import androidx.recyclerview.widget.RecyclerView
 import com.marcgdiez.jsonplaceholder.business.Comment
-import com.marcgdiez.jsonplaceholder.extensions.inflate
-import kotlinx.android.synthetic.main.comment_adapter.view.*
-
+import com.marcgdiez.jsonplaceholder.databinding.CommentAdapterBinding
 
 class CommentsAdapter : RecyclerView.Adapter<ItemViewHolder>() {
 
@@ -18,7 +15,7 @@ class CommentsAdapter : RecyclerView.Adapter<ItemViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
-        ItemViewHolder(parent.inflate(R.layout.comment_adapter))
+        ItemViewHolder(CommentAdapterBinding.inflate(LayoutInflater.from(parent.context)))
 
 
     override fun getItemId(position: Int): Long = position.toLong()
@@ -35,11 +32,13 @@ class CommentsAdapter : RecyclerView.Adapter<ItemViewHolder>() {
         notifyItemInserted(comments.lastIndex)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) = holder.bind(comments[position])
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) =
+        holder.bind(comments[position])
 }
 
-class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(comment: Comment) = with(itemView) {
+class ItemViewHolder(private val binding: CommentAdapterBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(comment: Comment) = with(binding) {
         name.text = comment.name
         email.text = comment.email
         commentBody.text = comment.body

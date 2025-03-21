@@ -1,14 +1,13 @@
 package com.marcgdiez.jsonplaceholder.list
 
-import android.support.v7.widget.RecyclerView
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.marcgdiez.jsonplaceholder.R
+import androidx.recyclerview.widget.RecyclerView
 import com.marcgdiez.jsonplaceholder.business.Item
-import com.marcgdiez.jsonplaceholder.extensions.inflate
-import kotlinx.android.synthetic.main.item_adapter.view.*
+import com.marcgdiez.jsonplaceholder.databinding.ItemAdapterBinding
 
-class ItemsAdapter(val onItemClickListener: (Item) -> Unit) : RecyclerView.Adapter<ItemViewHolder>() {
+class ItemsAdapter(val onItemClickListener: (Item) -> Unit) :
+    RecyclerView.Adapter<ItemViewHolder>() {
 
     private var items: List<Item> = ArrayList()
 
@@ -17,7 +16,7 @@ class ItemsAdapter(val onItemClickListener: (Item) -> Unit) : RecyclerView.Adapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
-        ItemViewHolder(parent.inflate(R.layout.item_adapter))
+        ItemViewHolder(ItemAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun getItemId(position: Int): Long = position.toLong()
 
@@ -28,16 +27,18 @@ class ItemsAdapter(val onItemClickListener: (Item) -> Unit) : RecyclerView.Adapt
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) = holder.bind(items[position]) { item -> onItemClickListener(item) }
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) =
+        holder.bind(items[position]) { item -> onItemClickListener(item) }
 }
 
-class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ItemViewHolder(private val binding: ItemAdapterBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Item, listener: (Item) -> Unit) = with(itemView) {
+    fun bind(item: Item, listener: (Item) -> Unit) = with(binding) {
         title.text = item.title
         body.text = item.body.take(MAX_CHARACTERS)
         itemId.text = item.id
-        setOnClickListener { listener(item) }
+        root.setOnClickListener { listener(item) }
     }
 
     companion object {

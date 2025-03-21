@@ -2,10 +2,10 @@ package com.marcgdiez.jsonplaceholder.extensions
 
 import android.app.AlertDialog
 import android.content.Context
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import com.marcgdiez.jsonplaceholder.R
 
 fun View.isVisible() = this.visibility == View.VISIBLE

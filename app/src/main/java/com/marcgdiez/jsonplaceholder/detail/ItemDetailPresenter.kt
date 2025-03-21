@@ -34,11 +34,9 @@ class ItemDetailPresenter(
     }
 
     override fun onSendCommentClick(text: String) {
-        when (text.isEmpty()) {
-            false -> {
-                view?.clearCommentArea()
-                view?.addComment(Comment(Random().nextInt().toString(), "You", "youremail@gmail.com", text))
-            }
+        if(text.isNotEmpty()){
+            view?.clearCommentArea()
+            view?.addComment(Comment(Random().nextInt().toString(), "You", "youremail@gmail.com", text))
         }
     }
 }
