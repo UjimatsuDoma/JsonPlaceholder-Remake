@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".JsonApp"
+        android:name="prac.tanken.jsonplaceholder.JsonApp"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +18,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".list.ItemsListActivity"
+            android:name="prac.tanken.jsonplaceholder.list.ItemsListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".detail.ItemDetailActivity" />
+        <activity android:name="prac.tanken.jsonplaceholder.detail.ItemDetailActivity" />
     </application>
 
 </manifest>

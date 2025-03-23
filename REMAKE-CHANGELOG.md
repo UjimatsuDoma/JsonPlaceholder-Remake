@@ -22,3 +22,9 @@
     1. `@LayoutRes` import in `View.kt`
     2. `onSendCommentClick` `when`-clause error in `ItemDetailPresenter`
 14. Fix: `onCreateViewHolder` invoke the three-argument overload to fix incorrect list item size
+
+## March 23, 2025
+
+1. Added Gradle wrapper: install JDK 17 and execute command `gradle wrapper`
+2. Changed package name of the project
+3. import AndroidX Test libraries to resolve errors
